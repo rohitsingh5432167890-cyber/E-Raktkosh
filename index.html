@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>e-RaktKosh | Centralized Blood Bank Management & Donor Portal</title>
+    <meta name="description" content="Official Centralized Blood Bank Management System & Voluntary Blood Donor Portal. Find real-time blood stock availability, donation camps, and emergency blood assistance across India.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="theme-light">
+    <!-- Top Emergency Announcement Bar -->
+    <div class="emergency-bar">
+        <div class="container emergency-content">
+            <div class="emergency-tag">
+                <i data-lucide="siren" class="icon-spin"></i>
+                <span data-i18n="emergency_helpline_tag">NATIONAL BLOOD HELPLINE</span>
+            </div>
+            <div class="marquee">
+                <span data-i18n-html="emergency_marquee">Toll-Free Emergency Number: <strong>104</strong> / <strong>1075</strong> | Thalassemia & Rare Blood Group Urgent Assistance Desk Active 24x7 | Donate Blood, Save Lives!</span>
+            </div>
+            <div class="quick-actions">
+                <button class="btn-sos" id="btn-open-sos">
+                    <i data-lucide="zap"></i> <span data-i18n="btn_emergency_sos">Emergency SOS Request</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation Header -->
+    <header class="main-header">
+        <div class="container header-container">
+            <div class="brand">
+                <div class="emblem-wrapper">
+                    <div class="blood-drop-logo">
+                        <i data-lucide="droplet"></i>
+                    </div>
+                </div>
+                <div class="brand-text">
+                    <h1>e-RaktKosh</h1>
+                    <p data-i18n="brand_subtitle">Centralized Blood Center Management System • Govt. of India</p>
+                </div>
+            </div>
+
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#search" class="nav-link active" data-tab="availability"><i data-lucide="search"></i> <span data-i18n="nav_stock">Blood Stock</span></a></li>
+                    <li><a href="#camps" class="nav-link" data-tab="camps"><i data-lucide="calendar"></i> <span data-i18n="nav_camps">Donation Camps</span></a></li>
+                    <li><a href="#donor" class="nav-link" data-tab="donor"><i data-lucide="user-plus"></i> <span data-i18n="nav_donor">Register as Donor</span></a></li>
+                    <li><a href="#compatibility" class="nav-link" data-tab="compatibility"><i data-lucide="git-merge"></i> <span data-i18n="nav_compatibility">Compatibility</span></a></li>
+                    <li><a href="#admin" class="nav-link" data-tab="admin"><i data-lucide="layout-dashboard"></i> <span data-i18n="nav_admin">Blood Bank Admin</span></a></li>
+                </ul>
+            </nav>
+
+            <div class="header-controls">
+                <select id="lang-select" class="lang-select" aria-label="Select Language">
+                    <option value="en">English</option>
+                    <option value="hi">हिंदी (Hindi)</option>
+                    <option value="bn">বাংলা (Bengali)</option>
+                    <option value="ta">தமிழ் (Tamil)</option>
+                    <option value="te">తెలుగు (Telugu)</option>
+                    <option value="mr">मराठी (Marathi)</option>
+                </select>
+                <button id="theme-toggle" class="btn-icon" title="Toggle Light/Dark Theme">
+                    <i data-lucide="moon" id="theme-icon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Banner with Real-time Portal Statistics -->
+    <section class="hero-section">
+        <div class="hero-overlay"></div>
+        <div class="container hero-container">
+            <div class="hero-text">
+                <span class="badge-pill"><i data-lucide="shield-check"></i> <span data-i18n="hero_badge">MoHFW & National Blood Transfusion Council Initiative</span></span>
+                <h2 data-i18n="hero_title">Connecting Life Savers With Every Urgent Need</h2>
+                <p data-i18n="hero_desc">Real-time transparency for over 4,500+ registered blood banks across India. Search stock availability, book voluntary donation slots, or dispatch emergency requests in seconds.</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" id="hero-find-blood">
+                        <i data-lucide="search"></i> <span data-i18n="hero_btn_stock">Search Blood Stock</span>
+                    </button>
+                    <button class="btn btn-secondary" id="hero-book-camp">
+                        <i data-lucide="heart-handshake"></i> <span data-i18n="hero_btn_camps">Find Nearby Camps</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon bg-red"><i data-lucide="building-2"></i></div>
+                    <div class="stat-info">
+                        <h3 id="stat-blood-banks">4,528</h3>
+                        <p data-i18n="stat_blood_banks_label">Registered Blood Banks</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon bg-green"><i data-lucide="droplet"></i></div>
+                    <div class="stat-info">
+                        <h3 id="stat-available-units">148,920</h3>
+                        <p data-i18n="stat_available_units_label">Units Currently Available</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon bg-amber"><i data-lucide="map-pin"></i></div>
+                    <div class="stat-info">
+                        <h3 id="stat-camps">88,410</h3>
+                        <p data-i18n="stat_camps_label">Donation Camps Conducted</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon bg-blue"><i data-lucide="users"></i></div>
+                    <div class="stat-info">
+                        <h3 id="stat-donors">2.45M+</h3>
+                        <p data-i18n="stat_donors_label">Voluntary Registered Donors</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Container -->
+    <main class="container main-content">
+
+        <!-- TAB 1: Real-Time Blood Stock Search -->
+        <section id="tab-availability" class="tab-pane active">
+            <div class="card search-card">
+                <div class="card-header">
+                    <div>
+                        <h2><i data-lucide="search" class="text-red"></i> <span data-i18n="tab1_title">Real-Time Blood Stock Availability Search</span></h2>
+                        <p data-i18n="tab1_desc">Filter verified stock levels across licensed blood banks in your district.</p>
+                    </div>
+                    <span class="pulse-indicator"><span class="dot"></span> <span data-i18n="tab1_syncing">Live Data Syncing</span></span>
+                </div>
+
+                <form id="stock-search-form" class="search-form">
+                    <div class="form-group">
+                        <label for="search-state"><i data-lucide="map"></i> <span data-i18n="label_state">State / Union Territory</span></label>
+                        <select id="search-state" class="form-control" required>
+                            <option value="" data-i18n="select_state_default">-- Select State --</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="search-district"><i data-lucide="map-pin"></i> <span data-i18n="label_district">District</span></label>
+                        <select id="search-district" class="form-control" disabled>
+                            <option value="" data-i18n="select_district_default">-- Select District --</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="search-blood-group"><i data-lucide="droplet"></i> <span data-i18n="label_blood_group">Blood Group</span></label>
+                        <select id="search-blood-group" class="form-control">
+                            <option value="ALL" data-i18n="all_groups">All Groups</option>
+                            <option value="A+">A +ve</option>
+                            <option value="A-">A -ve</option>
+                            <option value="B+">B +ve</option>
+                            <option value="B-">B -ve</option>
+                            <option value="AB+">AB +ve</option>
+                            <option value="AB-">AB -ve</option>
+                            <option value="O+">O +ve</option>
+                            <option value="O-">O -ve</option>
+                            <option value="BOMBAY">Bombay Blood Group (Rare)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="search-component"><i data-lucide="layers"></i> <span data-i18n="label_component">Component Type</span></label>
+                        <select id="search-component" class="form-control">
+                            <option value="ALL" data-i18n="all_components">All Components</option>
+                            <option value="Whole Blood">Whole Blood</option>
+                            <option value="Packed Red Blood Cells (PRBC)">Packed Red Blood Cells (PRBC)</option>
+                            <option value="Fresh Frozen Plasma (FFP)">Fresh Frozen Plasma (FFP)</option>
+                            <option value="Random Donor Platelets (RDP)">Random Donor Platelets (RDP)</option>
+                            <option value="Single Donor Platelets (SDP)">Single Donor Platelets (SDP)</option>
+                            <option value="Cryoprecipitate">Cryoprecipitate</option>
+                        </select>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary btn-block">
+                            <i data-lucide="filter"></i> <span data-i18n="btn_search_stock">Search Stock</span>
+                        </button>
+                        <button type="button" id="btn-reset-search" class="btn btn-secondary">
+                            <i data-lucide="rotate-ccw"></i> <span data-i18n="btn_reset">Reset</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Search Results Section -->
+            <div class="results-header">
+                <h3><span data-i18n="found_prefix">Found</span> <span id="results-count">0</span> <span data-i18n="found_suffix">Blood Centers matching criteria</span></h3>
+                <div class="results-legend">
+                    <span class="legend-item"><span class="badge badge-success" data-i18n="legend_in_stock">In Stock (>10)</span></span>
+                    <span class="legend-item"><span class="badge badge-warning" data-i18n="legend_low_stock">Low Stock (3-10)</span></span>
+                    <span class="legend-item"><span class="badge badge-danger" data-i18n="legend_critical">Critical (<3)</span></span>
+                </div>
+            </div>
+
+            <div id="stock-results-grid" class="results-grid">
+                <!-- Dynamically populated stock cards -->
+            </div>
+        </section>
+
+        <!-- TAB 2: Donation Camps & Appointment Booking -->
+        <section id="tab-camps" class="tab-pane">
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <h2><i data-lucide="calendar" class="text-red"></i> <span data-i18n="tab2_title">Upcoming Voluntary Blood Donation Camps</span></h2>
+                        <p data-i18n="tab2_desc">Locate mobile blood donation drives, campus camps, and community blood collection sessions near you.</p>
+                    </div>
+                </div>
+
+                <div class="camp-filter-bar">
+                    <div class="form-group">
+                        <label for="camp-state" data-i18n="label_filter_state">Filter State</label>
+                        <select id="camp-state" class="form-control">
+                            <option value="ALL" data-i18n="all_states">All States</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="camp-date" data-i18n="label_filter_date">Filter Date</label>
+                        <input type="date" id="camp-date" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="camp-search-text" data-i18n="label_search_keyword">Search Keyword</label>
+                        <input type="text" id="camp-search-text" class="form-control" placeholder="e.g. AIIMS, Red Cross, Rotary..." data-i18n-placeholder="placeholder_keyword">
+                    </div>
+                </div>
+
+                <div id="camps-grid" class="camps-grid">
+                    <!-- Dynamically populated camp cards -->
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 3: Donor Registration & Eligibility Checker -->
+        <section id="tab-donor" class="tab-pane">
+            <div class="grid-2col">
+                <div class="card">
+                    <div class="card-header">
+                        <h2><i data-lucide="user-plus" class="text-red"></i> <span data-i18n="tab3_title">Voluntary Donor Registration</span></h2>
+                        <p data-i18n="tab3_desc">Become part of India's centralized voluntary blood donor database.</p>
+                    </div>
+
+                    <form id="donor-register-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="donor-name" data-i18n="label_full_name">Full Name *</label>
+                                <input type="text" id="donor-name" class="form-control" required placeholder="e.g. Ananya Sharma">
+                            </div>
+                            <div class="form-group">
+                                <label for="donor-age" data-i18n="label_age">Age (Years) *</label>
+                                <input type="number" id="donor-age" class="form-control" min="18" max="65" required placeholder="18 - 65">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="donor-gender" data-i18n="label_gender">Gender *</label>
+                                <select id="donor-gender" class="form-control" required>
+                                    <option value="" data-i18n="select_gender_default">-- Select --</option>
+                                    <option value="Male" data-i18n="gender_male">Male</option>
+                                    <option value="Female" data-i18n="gender_female">Female</option>
+                                    <option value="Transgender" data-i18n="gender_trans">Transgender</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="donor-blood-group" data-i18n="label_blood_group">Blood Group *</label>
+                                <select id="donor-blood-group" class="form-control" required>
+                                    <option value="" data-i18n="select_gender_default">-- Select --</option>
+                                    <option value="A+">A +ve</option>
+                                    <option value="A-">A -ve</option>
+                                    <option value="B+">B +ve</option>
+                                    <option value="B-">B -ve</option>
+                                    <option value="AB+">AB +ve</option>
+                                    <option value="AB-">AB -ve</option>
+                                    <option value="O+">O +ve</option>
+                                    <option value="O-">O -ve</option>
+                                    <option value="BOMBAY">Bombay Blood Group</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="donor-mobile" data-i18n="label_mobile">Mobile Number *</label>
+                                <input type="tel" id="donor-mobile" class="form-control" pattern="[0-9]{10}" placeholder="10-digit mobile" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="donor-email" data-i18n="label_email">Email Address</label>
+                                <input type="email" id="donor-email" class="form-control" placeholder="name@domain.com">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="donor-reg-state" data-i18n="label_state">State *</label>
+                                <select id="donor-reg-state" class="form-control" required>
+                                    <option value="" data-i18n="select_state_default">-- Select State --</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="donor-weight" data-i18n="label_weight">Weight (kg) *</label>
+                                <input type="number" id="donor-weight" class="form-control" min="45" placeholder="Min 45 kg" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="donor-last-donated" data-i18n="label_last_donated">Date of Last Donation (Leave blank if First Time)</label>
+                            <input type="date" id="donor-last-donated" class="form-control">
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="donor-consent" required>
+                            <label for="donor-consent" data-i18n="donor_consent_text">I consent to receive urgent blood request notifications in case of emergency needs in my district.</label>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block">
+                            <i data-lucide="check-circle"></i> <span data-i18n="btn_register_donor">Register & Generate Digital Donor Pass</span>
+                        </button>
+                    </form>
+                </div>
+
+                <div class="space-y">
+                    <!-- Quick Eligibility Checker -->
+                    <div class="card eligibility-card">
+                        <div class="card-header">
+                            <h3><i data-lucide="clipboard-check" class="text-green"></i> <span data-i18n="eligibility_title">Am I Eligible To Donate Today?</span></h3>
+                        </div>
+                        <ul class="eligibility-list">
+                            <li><i data-lucide="check" class="text-green"></i> <span data-i18n="eligibility_1">Age between 18 and 65 years</span></li>
+                            <li><i data-lucide="check" class="text-green"></i> <span data-i18n="eligibility_2">Weight above 45 kg</span></li>
+                            <li><i data-lucide="check" class="text-green"></i> <span data-i18n="eligibility_3">Hemoglobin level ≥ 12.5 g/dL</span></li>
+                            <li><i data-lucide="check" class="text-green"></i> <span data-i18n="eligibility_4">Last donation was at least 90 days ago (for Whole Blood)</span></li>
+                            <li><i data-lucide="x" class="text-red"></i> <span data-i18n="eligibility_5">No active fever, infection, or ongoing antibiotic treatment</span></li>
+                            <li><i data-lucide="x" class="text-red"></i> <span data-i18n="eligibility_6">No major surgery in past 6 months</span></li>
+                        </ul>
+                    </div>
+
+                    <!-- Digital Donor Card Preview Container -->
+                    <div id="donor-pass-container" class="card donor-pass-card hidden">
+                        <div class="donor-pass-header">
+                            <div class="emblem-small"><i data-lucide="shield"></i></div>
+                            <div>
+                                <h4 data-i18n="donor_card_title">e-RaktKosh Voluntary Donor Card</h4>
+                                <p data-i18n="donor_card_sub">Government of India • Ministry of Health</p>
+                            </div>
+                        </div>
+                        <div class="donor-pass-body">
+                            <div class="pass-photo-area">
+                                <div class="blood-group-badge" id="pass-blood-group">O+</div>
+                            </div>
+                            <div class="pass-details">
+                                <h3 id="pass-name">Ananya Sharma</h3>
+                                <p><strong data-i18n="donor_card_id">Donor ID:</strong> <span id="pass-id">ERK-2026-88912</span></p>
+                                <p><strong data-i18n="donor_card_mobile">Mobile:</strong> <span id="pass-mobile">+91 98765 43210</span></p>
+                                <p><strong data-i18n="donor_card_state">State:</strong> <span id="pass-state">Delhi</span></p>
+                                <p><strong data-i18n="donor_card_status">Status:</strong> <span class="badge badge-success" data-i18n="donor_card_active_badge">Active Lifesaver</span></p>
+                            </div>
+                            <div class="pass-qr">
+                                <div class="qr-box">
+                                    <i data-lucide="qr-code"></i>
+                                </div>
+                                <small data-i18n="donor_card_scan">Scan at Blood Center</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 4: Blood Compatibility Guide & Matrix -->
+        <section id="tab-compatibility" class="tab-pane">
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <h2><i data-lucide="git-merge" class="text-red"></i> <span data-i18n="tab4_title">Interactive Blood Group & Component Compatibility Guide</span></h2>
+                        <p data-i18n="tab4_desc">Select any blood group to highlight eligible donors and recipient matches instantly.</p>
+                    </div>
+                </div>
+
+                <div class="compatibility-selector">
+                    <label data-i18n="label_target_group">Select Target Blood Group to inspect:</label>
+                    <div class="blood-type-chips" id="compat-chips">
+                        <button class="chip active" data-group="O-">O -ve (Universal Donor)</button>
+                        <button class="chip" data-group="O+">O +ve</button>
+                        <button class="chip" data-group="A-">A -ve</button>
+                        <button class="chip" data-group="A+">A +ve</button>
+                        <button class="chip" data-group="B-">B -ve</button>
+                        <button class="chip" data-group="B+">B +ve</button>
+                        <button class="chip" data-group="AB-">AB -ve</button>
+                        <button class="chip" data-group="AB+">AB +ve (Universal Recipient)</button>
+                    </div>
+                </div>
+
+                <div class="grid-2col margin-top">
+                    <div class="compat-box give-box">
+                        <h3><i data-lucide="arrow-up-right" class="text-green"></i> <span data-i18n="give_to_title">Can GIVE Red Blood Cells To:</span></h3>
+                        <div id="give-to-list" class="badge-list">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+                    <div class="compat-box receive-box">
+                        <h3><i data-lucide="arrow-down-left" class="text-blue"></i> <span data-i18n="receive_from_title">Can RECEIVE Red Blood Cells From:</span></h3>
+                        <div id="receive-from-list" class="badge-list">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Component Shelf Life Reference -->
+                <div class="shelf-life-section margin-top">
+                    <h3><i data-lucide="clock"></i> <span data-i18n="shelf_life_title">Blood Components & Shelf Life Guide</span></h3>
+                    <div class="shelf-grid">
+                        <div class="shelf-card">
+                            <i data-lucide="droplets" class="text-red"></i>
+                            <h4 data-i18n="shelf_wb">Whole Blood</h4>
+                            <p class="shelf-days" data-i18n="shelf_wb_days">35 - 42 Days</p>
+                            <small data-i18n="shelf_wb_desc">Stored at 2°C to 6°C</small>
+                        </div>
+                        <div class="shelf-card">
+                            <i data-lucide="layers" class="text-red"></i>
+                            <h4 data-i18n="shelf_prbc">Packed Red Cells (PRBC)</h4>
+                            <p class="shelf-days" data-i18n="shelf_prbc_days">42 Days</p>
+                            <small data-i18n="shelf_prbc_desc">Increases oxygen transport capacity</small>
+                        </div>
+                        <div class="shelf-card">
+                            <i data-lucide="activity" class="text-amber"></i>
+                            <h4 data-i18n="shelf_platelets">Platelets (SDP / RDP)</h4>
+                            <p class="shelf-days" data-i18n="shelf_platelets_days">5 Days</p>
+                            <small data-i18n="shelf_platelets_desc">Continuous agitation at 20°C - 24°C</small>
+                        </div>
+                        <div class="shelf-card">
+                            <i data-lucide="snowflake" class="text-blue"></i>
+                            <h4 data-i18n="shelf_ffp">Fresh Frozen Plasma (FFP)</h4>
+                            <p class="shelf-days" data-i18n="shelf_ffp_days">1 Year</p>
+                            <small data-i18n="shelf_ffp_desc">Frozen at -30°C or colder</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 5: Blood Bank Admin & Inventory View -->
+        <section id="tab-admin" class="tab-pane">
+            <div class="card">
+                <div class="card-header flex-between">
+                    <div>
+                        <h2><i data-lucide="layout-dashboard" class="text-red"></i> <span data-i18n="tab5_title">Blood Center Management & Inventory Control</span></h2>
+                        <p data-i18n="tab5_desc">Internal dashboard for blood bank operators, stock aging monitors, and emergency dispatch.</p>
+                    </div>
+                    <div class="admin-select-wrapper">
+                        <label for="admin-center-select" data-i18n="label_select_center">Select Blood Center:</label>
+                        <select id="admin-center-select" class="form-control">
+                            <!-- Populated dynamically -->
+                        </select>
+                    </div>
+                </div>
+
+                <div class="admin-stats-row margin-top">
+                    <div class="admin-stat-card">
+                        <small data-i18n="admin_stat_total">Total In-Stock Units</small>
+                        <h3 id="admin-total-units">145 Units</h3>
+                        <span class="badge badge-success" data-i18n="badge_optimal">Optimal Inventory</span>
+                    </div>
+                    <div class="admin-stat-card">
+                        <small data-i18n="admin_stat_expiring">Expiring Within 7 Days</small>
+                        <h3 id="admin-expiring-units" class="text-amber">8 Units</h3>
+                        <span class="badge badge-warning" data-i18n="badge_action_req">Action Required</span>
+                    </div>
+                    <div class="admin-stat-card">
+                        <small data-i18n="admin_stat_pending">Pending Emergency Requests</small>
+                        <h3 id="admin-pending-requests" class="text-red">2 Requests</h3>
+                        <span class="badge badge-danger" data-i18n="badge_high_priority">High Priority</span>
+                    </div>
+                    <div class="admin-stat-card">
+                        <small data-i18n="admin_stat_next_camp">Next Camp Scheduled</small>
+                        <h3>Tomorrow</h3>
+                        <span class="badge badge-info" data-i18n="badge_next_camp">AIIMS Campus Drive</span>
+                    </div>
+                </div>
+
+                <!-- Admin Stock Matrix Table -->
+                <div class="table-responsive margin-top">
+                    <table class="table" id="admin-inventory-table">
+                        <thead>
+                            <tr>
+                                <th data-i18n="th_blood_group">Blood Group</th>
+                                <th data-i18n="th_whole_blood">Whole Blood</th>
+                                <th data-i18n="th_prbc">PRBC</th>
+                                <th data-i18n="th_platelets">Platelets (SDP/RDP)</th>
+                                <th data-i18n="th_ffp">FFP</th>
+                                <th data-i18n="th_status">Stock Status</th>
+                                <th data-i18n="th_actions">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-stock-tbody">
+                            <!-- Populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Emergency SOS Modal -->
+    <div id="sos-modal" class="modal-backdrop hidden">
+        <div class="modal-card">
+            <div class="modal-header bg-red text-white">
+                <div>
+                    <h3><i data-lucide="siren"></i> <span data-i18n="sos_modal_title">Emergency Blood Requirement SOS</span></h3>
+                    <p data-i18n="sos_modal_desc">Broadcast urgent request to nearby blood banks and registered voluntary donors.</p>
+                </div>
+                <button class="modal-close" id="sos-modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="sos-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="sos-patient-name" data-i18n="label_patient_name">Patient Name *</label>
+                            <input type="text" id="sos-patient-name" class="form-control" required placeholder="e.g. Ramesh Kumar">
+                        </div>
+                        <div class="form-group">
+                            <label for="sos-blood-group" data-i18n="label_blood_group">Required Blood Group *</label>
+                            <select id="sos-blood-group" class="form-control" required>
+                                <option value="O-">O -ve (Urgent Needs)</option>
+                                <option value="O+">O +ve</option>
+                                <option value="A+">A +ve</option>
+                                <option value="A-">A -ve</option>
+                                <option value="B+">B +ve</option>
+                                <option value="B-">B -ve</option>
+                                <option value="AB+">AB +ve</option>
+                                <option value="AB-">AB -ve</option>
+                                <option value="BOMBAY">Bombay Blood Group (Rare)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="sos-units" data-i18n="label_units_required">Units Required *</label>
+                            <input type="number" id="sos-units" class="form-control" min="1" max="10" value="2" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="sos-urgency" data-i18n="label_urgency">Urgency Timeline *</label>
+                            <select id="sos-urgency" class="form-control" required>
+                                <option value="Immediate (< 2 Hours)">Immediate (&lt; 2 Hours)</option>
+                                <option value="Within 6 Hours">Within 6 Hours</option>
+                                <option value="Within 24 Hours">Within 24 Hours</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="sos-hospital" data-i18n="label_hospital">Hospital Name & Address *</label>
+                        <input type="text" id="sos-hospital" class="form-control" required placeholder="e.g. AIIMS Emergency Ward 4, New Delhi">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="sos-contact-person" data-i18n="label_contact_doctor">Attendant / Doctor Name *</label>
+                            <input type="text" id="sos-contact-person" class="form-control" required placeholder="e.g. Dr. Rajesh Verma">
+                        </div>
+                        <div class="form-group">
+                            <label for="sos-contact-mobile" data-i18n="label_contact_mobile">Contact Phone *</label>
+                            <input type="tel" id="sos-contact-mobile" class="form-control" pattern="[0-9]{10}" required placeholder="10-digit phone">
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="btn-cancel-sos" data-i18n="btn_cancel">Cancel</button>
+                        <button type="submit" class="btn btn-primary bg-red">
+                            <i data-lucide="radio"></i> <span data-i18n="btn_broadcast">Broadcast Emergency SOS</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Booking Confirmation Modal -->
+    <div id="booking-modal" class="modal-backdrop hidden">
+        <div class="modal-card">
+            <div class="modal-header bg-green text-white">
+                <div>
+                    <h3><i data-lucide="check-circle"></i> <span data-i18n="booking_modal_title">Book Donation Appointment</span></h3>
+                    <p id="booking-camp-title">Camp Title</p>
+                </div>
+                <button class="modal-close" id="booking-modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="booking-form">
+                    <input type="hidden" id="booking-camp-id">
+                    <div class="form-group">
+                        <label for="booking-donor-name" data-i18n="label_booking_donor_name">Donor Name *</label>
+                        <input type="text" id="booking-donor-name" class="form-control" required placeholder="Your full name">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="booking-mobile" data-i18n="label_mobile">Mobile Number *</label>
+                            <input type="tel" id="booking-mobile" class="form-control" pattern="[0-9]{10}" required placeholder="10-digit mobile">
+                        </div>
+                        <div class="form-group">
+                            <label for="booking-time-slot" data-i18n="label_pref_slot">Preferred Time Slot *</label>
+                            <select id="booking-time-slot" class="form-control" required>
+                                <option value="09:00 AM - 11:00 AM">09:00 AM - 11:00 AM</option>
+                                <option value="11:00 AM - 01:00 PM">11:00 AM - 01:00 PM</option>
+                                <option value="02:00 PM - 04:00 PM">02:00 PM - 04:00 PM</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="btn-cancel-booking" data-i18n="btn_cancel">Cancel</button>
+                        <button type="submit" class="btn btn-primary bg-green" data-i18n="btn_confirm_slot">Confirm Slot & Generate Pass</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification System -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-brand">
+                <div class="brand">
+                    <div class="blood-drop-logo small"><i data-lucide="droplet"></i></div>
+                    <h3>e-RaktKosh</h3>
+                </div>
+                <p data-i18n="footer_brand_desc">Centralized Blood Center Management System under National Health Mission, Ministry of Health & Family Welfare, Government of India.</p>
+            </div>
+            <div class="footer-links">
+                <h4 data-i18n="footer_quick_portals">Quick Portals</h4>
+                <ul>
+                    <li><a href="#search" data-tab="availability" data-i18n="footer_stock_link">Blood Stock Availability</a></li>
+                    <li><a href="#camps" data-tab="camps" data-i18n="footer_camps_link">Voluntary Camps Directory</a></li>
+                    <li><a href="#donor" data-tab="donor" data-i18n="footer_donor_link">Donor Registration Portal</a></li>
+                    <li><a href="#compatibility" data-tab="compatibility" data-i18n="footer_compat_link">Blood Compatibility Guide</a></li>
+                    <li><a href="#admin" data-tab="admin" data-i18n="footer_admin_link">Blood Bank Login</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4 data-i18n="footer_helpdesk">Helpdesk Support</h4>
+                <p><i data-lucide="phone"></i> <span data-i18n="footer_helpline">Emergency Helpline:</span> <strong>104 / 1075</strong></p>
+                <p><i data-lucide="mail"></i> <span data-i18n="footer_email">Email:</span> eraktkosh[at]cdac[dot]in</p>
+                <p><i data-lucide="building"></i> <span data-i18n="footer_tech_cell">C-DAC & MoHFW Technical Cell, India</span></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container flex-between">
+                <p data-i18n="footer_copy">&copy; 2026 e-RaktKosh • Ministry of Health and Family Welfare. All Rights Reserved.</p>
+                <p data-i18n="footer_tagline">Designed with High Precision & Emergency Accessibility</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Include JavaScript Files -->
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
