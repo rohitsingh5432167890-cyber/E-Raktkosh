@@ -126,11 +126,11 @@ export const EmergencySOS = () => {
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '2.5rem', flexWrap: 'wrap', gap: '1.25rem' }}>
           <div>
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', color: '#ef4444', fontWeight: '700', fontSize: '0.85rem', marginBottom: '0.5rem' }}>
-              <ShieldAlert size={16} /> National Blood Emergency Alert System
+              <ShieldAlert size={16} /> BloodBuddy Emergency Alert System
             </div>
             <h1 style={{ fontSize: '2.2rem', fontWeight: '800' }}>Live Emergency SOS Broadcasting</h1>
             <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem' }}>
-              Critical real-time transfusion requirements broadcast to registered voluntary donors and licensed facilities.
+              Critical real-time transfusion requirements broadcast to registered voluntary donors and verified hospital centers.
             </p>
           </div>
 

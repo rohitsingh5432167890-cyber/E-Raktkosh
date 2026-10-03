@@ -73,7 +73,7 @@ export const DonationHistory = () => {
             </button>
             <h1 style={{ fontSize: '1.85rem', fontWeight: '800' }}>My Donation History & Certificates</h1>
             <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>
-              Official records of your voluntary contributions to the national blood supply.
+              Official records of your voluntary contributions to the BloodBuddy network.
             </p>
           </div>
 

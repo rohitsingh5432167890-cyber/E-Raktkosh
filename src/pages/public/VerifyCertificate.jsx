@@ -24,12 +24,12 @@ export const VerifyCertificate = () => {
       const res = await publicApi.verifyCertificate(idToSearch.trim());
       if (res.success && res.verified) {
         setResult(res.certificate);
-        showToast('Certificate successfully validated in National Registry!', 'success');
+        showToast('Certificate successfully validated in BloodBuddy Registry!', 'success');
       } else {
         setError(res.message || 'Certificate could not be verified.');
       }
     } catch (err) {
-      setError(err.message || 'Certificate was not found in the national registry.');
+      setError(err.message || 'Certificate was not found in the registry.');
     } finally {
       setLoading(false);
     }
@@ -60,9 +60,9 @@ export const VerifyCertificate = () => {
           >
             <ShieldCheck size={30} color="#10b981" />
           </div>
-          <h1 style={{ fontSize: '2.2rem', fontWeight: '800' }}>National Certificate Verification</h1>
+          <h1 style={{ fontSize: '2.2rem', fontWeight: '800' }}>Certificate Verification Portal</h1>
           <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', maxWidth: '560px', margin: '0.4rem auto 0 auto' }}>
-            Verify the authenticity of any e-RaktKosh Voluntary Blood Donor Certificate against the Ministry of Health and Family Welfare central ledger.
+            Verify the authenticity of any BloodBuddy Voluntary Blood Donor Certificate against the verified central registry.
           </p>
         </div>
 
@@ -84,13 +84,13 @@ export const VerifyCertificate = () => {
           >
             <div className="form-group">
               <label className="form-label" style={{ fontSize: '0.9rem' }}>
-                Enter e-RaktKosh Certificate Number
+                Enter BloodBuddy Certificate Number
               </label>
               <div style={{ display: 'flex', gap: '0.75rem' }}>
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="e.g. ERK-CERT-2024-88412 or ERK-CERT-2026-..."
+                  placeholder="e.g. BB-CERT-2024-88412 or BB-CERT-2026-..."
                   value={certificateId}
                   onChange={(e) => setCertificateId(e.target.value)}
                   style={{ textTransform: 'uppercase', fontFamily: 'monospace', letterSpacing: '0.05em' }}
@@ -118,17 +118,17 @@ export const VerifyCertificate = () => {
               type="button"
               className="btn btn-secondary btn-sm"
               style={{ fontSize: '0.75rem', padding: '0.2rem 0.55rem' }}
-              onClick={() => handleFillSample('ERK-CERT-2024-88412')}
+              onClick={() => handleFillSample('BB-CERT-2024-88412')}
             >
-              ERK-CERT-2024-88412 (Central Blood Bank)
+              BB-CERT-2024-88412 (AIIMS Central)
             </button>
             <button
               type="button"
               className="btn btn-secondary btn-sm"
               style={{ fontSize: '0.75rem', padding: '0.2rem 0.55rem' }}
-              onClick={() => handleFillSample('ERK-CERT-2024-19402')}
+              onClick={() => handleFillSample('BB-CERT-2024-19402')}
             >
-              ERK-CERT-2024-19402 (Safdarjung)
+              BB-CERT-2024-19402 (Safdarjung)
             </button>
           </div>
         </div>

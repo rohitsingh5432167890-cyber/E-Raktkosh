@@ -66,7 +66,7 @@ export const Landing = () => {
 
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
           <div style={{ maxWidth: '820px', margin: '0 auto', textAlign: 'center' }}>
-            {/* Government Badge */}
+            {/* Platform Badge */}
             <div
               style={{
                 display: 'inline-flex',
@@ -84,7 +84,7 @@ export const Landing = () => {
               }}
             >
               <ShieldCheck size={16} color="#ef4444" />
-              <span>Ministry of Health and Family Welfare (MoHFW) Initiative</span>
+              <span>Unified Community & Blood Donor Network</span>
             </div>
 
             {/* Main Headline */}
@@ -106,7 +106,7 @@ export const Landing = () => {
                   WebkitTextFillColor: 'transparent'
                 }}
               >
-                India's Unified Blood Network.
+                Smart Real-Time Blood Network.
               </span>
             </h1>
 
@@ -120,7 +120,7 @@ export const Landing = () => {
                 margin: '0 auto 2.5rem auto'
               }}
             >
-              Real-time blood stock availability across licensed government and charitable blood centers. Instant QR donor passes, voluntary camps, and emergency SOS triage.
+              Real-time blood stock availability across verified hospital and charitable blood centers. Instant QR donor passes, voluntary drives, and emergency SOS triage.
             </p>
 
             {/* Fast Stock Search Widget */}
@@ -207,7 +207,7 @@ export const Landing = () => {
         </div>
       </section>
 
-      {/* Live National Counters */}
+      {/* Live Platform Metrics */}
       <section style={{ padding: '2.5rem 0', background: 'var(--bg-secondary)', borderBottom: '1px solid var(--border-color)' }}>
         <div className="container">
           <div
@@ -232,7 +232,7 @@ export const Landing = () => {
                 {totalBanks}
               </div>
               <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)', fontWeight: '600' }}>
-                Licensed Apex Blood Centers
+                Verified Partner Blood Centers
               </div>
             </div>
 
@@ -257,7 +257,7 @@ export const Landing = () => {
         </div>
       </section>
 
-      {/* 4 Pillars of e-RaktKosh */}
+      {/* 4 Pillars of BloodBuddy */}
       <section style={{ padding: '4.5rem 0' }}>
         <div className="container">
           <div style={{ textAlign: 'center', maxWidth: '650px', margin: '0 auto 3rem auto' }}>
@@ -326,7 +326,7 @@ export const Landing = () => {
               </div>
               <h3 style={{ fontSize: '1.25rem', fontWeight: '700', marginBottom: '0.65rem' }}>Emergency SOS Dispatch</h3>
               <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', lineHeight: '1.6', marginBottom: '1rem' }}>
-                Immediate emergency broadcast to nearby voluntary donors and blood banks for urgent surgeries and trauma cases.
+                Immediate emergency broadcast to nearby voluntary donors and blood centers for urgent surgeries and trauma cases.
               </p>
               <span style={{ color: '#ef4444', fontWeight: '600', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
                 Broadcast SOS <ArrowRight size={15} />
@@ -355,7 +355,7 @@ export const Landing = () => {
               </div>
               <h3 style={{ fontSize: '1.25rem', fontWeight: '700', marginBottom: '0.65rem' }}>Digital QR Donor Pass</h3>
               <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', lineHeight: '1.6', marginBottom: '1rem' }}>
-                Every voluntary donor receives a tamper-proof QR pass with real-time donation interval checks and verified honors.
+                Every voluntary donor receives a verified digital QR pass with real-time donation interval checks and honors.
               </p>
               <span style={{ color: '#60a5fa', fontWeight: '600', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
                 Get Donor Pass <ArrowRight size={15} />
@@ -433,7 +433,7 @@ export const Landing = () => {
               <div style={{ fontSize: '2.5rem', fontWeight: '900', color: 'rgba(198, 40, 40, 0.25)', position: 'absolute', top: '1rem', right: '1.25rem' }}>04</div>
               <h4 style={{ fontSize: '1.1rem', fontWeight: '700', marginBottom: '0.5rem' }}>Instant Certificate</h4>
               <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
-                Receive an authenticated Government Certificate of Appreciation on your portal with life-saver badges.
+                Receive a verified BloodBuddy Certificate of Appreciation on your portal with life-saver badges.
               </p>
             </div>
           </div>

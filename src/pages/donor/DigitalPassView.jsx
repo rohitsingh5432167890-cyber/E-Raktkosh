@@ -59,12 +59,12 @@ export const DigitalPassView = () => {
             </button>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.25rem' }}>
               <span className="badge badge-gov">
-                <Shield size={13} /> Official Digital Credential
+                <Shield size={13} /> Verified Digital Credential
               </span>
             </div>
-            <h1 style={{ fontSize: '2rem', fontWeight: '800' }}>MoHFW Digital Blood Donor Pass</h1>
+            <h1 style={{ fontSize: '2rem', fontWeight: '800' }}>BloodBuddy Digital Donor Pass</h1>
             <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem' }}>
-              Nationally verifiable contactless pass embedded with cryptographic donor credentials.
+              Verified contactless pass embedded with secure donor credentials and live eligibility.
             </p>
           </div>
 
@@ -110,14 +110,14 @@ export const DigitalPassView = () => {
                 <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
                   <Smartphone size={18} color="#60a5fa" style={{ flexShrink: 0, marginTop: '0.1rem' }} />
                   <div>
-                    <strong style={{ color: 'var(--text-main)' }}>Save to Mobile Device:</strong> You can download or screenshot this pass on your phone. It contains offline-verifiable data recognized at all government and licensed blood banks.
+                    <strong style={{ color: 'var(--text-main)' }}>Save to Mobile Device:</strong> You can download or screenshot this pass on your phone. It contains offline-verifiable data recognized at all partner blood centers.
                   </div>
                 </div>
 
                 <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
                   <CheckCircle size={18} color="#10b981" style={{ flexShrink: 0, marginTop: '0.1rem' }} />
                   <div>
-                    <strong style={{ color: 'var(--text-main)' }}>Priority Fast-Track:</strong> Presenting this pass bypasses paper pre-registration at voluntary donation drives across India.
+                    <strong style={{ color: 'var(--text-main)' }}>Priority Fast-Track:</strong> Presenting this pass bypasses paper pre-registration at voluntary donation drives and partner hospitals.
                   </div>
                 </div>
               </div>

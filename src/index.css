@@ -112,10 +112,15 @@ input, select, textarea {
   padding-bottom: 4rem;
 }
 
-/* Header Helpline Bar */
+/* Brand Accent Stripe */
+.brand-accent-stripe {
+  height: 4px;
+  background: linear-gradient(90deg, #8b0000 0%, #c62828 50%, #ef5350 100%);
+  width: 100%;
+}
 .gov-tricolor-stripe {
   height: 4px;
-  background: linear-gradient(90deg, #ff9933 33.33%, #ffffff 33.33%, #ffffff 66.66%, #138808 66.66%);
+  background: linear-gradient(90deg, #8b0000 0%, #c62828 50%, #ef5350 100%);
   width: 100%;
 }
 

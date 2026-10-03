@@ -65,16 +65,16 @@ export const Navbar = () => {
 
   return (
     <header style={{ position: 'sticky', top: 0, zIndex: 1000 }}>
-      {/* Tricolor stripe */}
-      <div className="gov-tricolor-stripe" />
+      {/* Brand accent stripe */}
+      <div className="brand-accent-stripe" />
 
       {/* Official Helpline & Controls Bar */}
       <div className="gov-top-bar">
         <div className="container gov-top-content">
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#fbbf24', fontWeight: '700' }}>
             <PhoneCall size={13} />
-            <a href="tel:1910" style={{ color: '#fbbf24', textDecoration: 'none' }} title="Call National Helpline 1910">
-              National Helpline: 1910 (Toll Free • 24x7)
+            <a href="tel:1910" style={{ color: '#fbbf24', textDecoration: 'none' }} title="Call Blood Helpline 1910">
+              24x7 Blood Helpline: 1910 (Toll Free)
             </a>
           </div>
 
@@ -140,7 +140,7 @@ export const Navbar = () => {
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                 <span style={{ fontSize: '1.2rem', fontWeight: '800', fontFamily: 'var(--font-heading)', color: 'var(--text-main)', letterSpacing: '-0.02em' }}>
-                  e-Rakt<span style={{ color: 'var(--primary-light)' }}>Kosh</span>
+                  Blood<span style={{ color: 'var(--primary-light)' }}>Buddy</span>
                 </span>
                 <span
                   style={{
@@ -157,7 +157,7 @@ export const Navbar = () => {
                 </span>
               </div>
               <div style={{ fontSize: '0.65rem', color: 'var(--text-dim)', letterSpacing: '0.04em', textTransform: 'uppercase' }}>
-                National Transfusion Service
+                Unified Blood & Donor Network
               </div>
             </div>
           </div>
@@ -311,7 +311,7 @@ export const Navbar = () => {
                               </>
                             ) : (
                               <>
-                                <Shield size={12} /> Licensed Center Admin
+                                <Shield size={12} /> Blood Bank Admin
                               </>
                             )}
                           </span>
@@ -612,7 +612,7 @@ export const Navbar = () => {
           </h3>
 
           <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', lineHeight: '1.5', marginBottom: '1.25rem' }}>
-            You are currently signed in as <strong>{user?.name || 'User'}</strong> ({isDonor ? 'Voluntary Donor' : 'Apex Center Admin'}). Signing out will terminate your current session on this device.
+            You are currently signed in as <strong>{user?.name || 'User'}</strong> ({isDonor ? 'Voluntary Donor' : 'Blood Bank Admin'}). Signing out will terminate your current session on this device.
           </p>
 
           <div
@@ -630,7 +630,7 @@ export const Navbar = () => {
             }}
           >
             <Lock size={16} color="var(--primary-light)" style={{ flexShrink: 0 }} />
-            <span>All your certificates, donation passes, and stock records remain securely saved in the National Blood Registry.</span>
+            <span>All your certificates, donation passes, and stock records remain securely saved in the BloodBuddy Registry.</span>
           </div>
 
           <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center' }}>

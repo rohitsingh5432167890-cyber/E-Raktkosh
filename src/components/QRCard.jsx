@@ -17,7 +17,7 @@ export const QRCard = ({ passData, donorProfile, donorName }) => {
   const handleDownload = () => {
     if (!passData.qrCode) return;
     const link = document.createElement('a');
-    link.download = `eraktkosh-pass-${passData.donorId}.png`;
+    link.download = `bloodbuddy-pass-${passData.donorId}.png`;
     link.href = passData.qrCode;
     link.click();
   };
@@ -39,8 +39,8 @@ export const QRCard = ({ passData, donorProfile, donorName }) => {
           position: 'relative'
         }}
       >
-        {/* Tricolor stripe on top of pass */}
-        <div style={{ height: '5px', background: 'linear-gradient(90deg, #ff9933 33.3%, #ffffff 33.3%, #ffffff 66.6%, #138808 66.6%)' }} />
+        {/* Accent stripe on top of pass */}
+        <div style={{ height: '5px', background: 'linear-gradient(90deg, #8b0000 0%, #c62828 50%, #ef5350 100%)' }} />
 
         {/* Header */}
         <div
@@ -70,10 +70,10 @@ export const QRCard = ({ passData, donorProfile, donorName }) => {
             </div>
             <div>
               <div style={{ fontSize: '0.68rem', letterSpacing: '0.08em', color: '#fca5a5', textTransform: 'uppercase', fontWeight: '700' }}>
-                Ministry of Health & Family Welfare
+                BLOODBUDDY VERIFIED NETWORK
               </div>
               <div style={{ fontSize: '1rem', fontWeight: '800', fontFamily: 'var(--font-heading)', color: '#ffffff' }}>
-                e-RaktKosh Digital Donor Pass
+                Digital Donor Pass
               </div>
             </div>
           </div>
@@ -111,7 +111,7 @@ export const QRCard = ({ passData, donorProfile, donorName }) => {
               {passData.qrCode ? (
                 <img
                   src={passData.qrCode}
-                  alt="Official Donor QR Pass"
+                  alt="Donor QR Pass"
                   style={{ width: '128px', height: '128px', display: 'block' }}
                 />
               ) : (
@@ -213,7 +213,7 @@ export const QRCard = ({ passData, donorProfile, donorName }) => {
             </div>
             <div>
               <span style={{ color: '#94a3b8' }}>Issued Through:</span> <br />
-              <strong style={{ color: '#ffffff' }}>MoHFW Blood Gateway</strong>
+              <strong style={{ color: '#ffffff' }}>BloodBuddy Registry</strong>
             </div>
           </div>
 
@@ -228,7 +228,7 @@ export const QRCard = ({ passData, donorProfile, donorName }) => {
               border: '1px dashed rgba(255, 255, 255, 0.1)'
             }}
           >
-            Show this QR code at any licensed Blood Center or Voluntary Camp for instant verified check-in.
+            Show this QR code at any verified Blood Center or Voluntary Drive for instant check-in.
           </div>
         </div>
       </div>

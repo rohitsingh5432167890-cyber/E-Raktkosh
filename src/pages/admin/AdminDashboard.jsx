@@ -76,10 +76,10 @@ export const AdminDashboard = () => {
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', marginBottom: '0.5rem' }}>
                 <span className="badge badge-gov">
-                  <Building2 size={13} /> Licensed Apex Center
+                  <Building2 size={13} /> Partner Blood Center
                 </span>
                 <span style={{ fontSize: '0.78rem', color: '#93c5fd', fontFamily: 'monospace' }}>
-                  License: {facility?.licenseNumber || 'DL/BLOOD/1996/001'}
+                  Center Code: {facility?.licenseNumber || 'BB-BLD-1996-001'}
                 </span>
               </div>
               <h1 style={{ fontSize: '2.1rem', fontWeight: '800', color: '#ffffff' }}>
@@ -377,7 +377,7 @@ export const AdminDashboard = () => {
             Sign out of Admin Hub?
           </h3>
           <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', lineHeight: '1.5', marginBottom: '1.25rem' }}>
-            You are managing <strong>{facility?.name || 'Blood Bank'}</strong> as <strong>{user?.name}</strong>. Stock data and verification history remain safe in the national registry.
+            You are managing <strong>{facility?.name || 'Blood Bank'}</strong> as <strong>{user?.name}</strong>. Stock data and verification history remain safe in the BloodBuddy registry.
           </p>
           <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center' }}>
             <button

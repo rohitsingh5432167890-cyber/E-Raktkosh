@@ -119,7 +119,7 @@ export const DonorDashboard = () => {
               {totalDonations} <span style={{ fontSize: '0.9rem', color: 'var(--text-muted)', fontWeight: '400' }}>units</span>
             </div>
             <div style={{ fontSize: '0.78rem', color: '#34d399', marginTop: '0.35rem', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
-              <ShieldCheck size={14} /> Verified in National Registry
+              <ShieldCheck size={14} /> Verified in BloodBuddy Registry
             </div>
           </div>
 

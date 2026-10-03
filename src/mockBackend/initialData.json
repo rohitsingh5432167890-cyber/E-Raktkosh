@@ -3,7 +3,7 @@
     {
       "id": "usr-donor-01",
       "name": "Rahul Sharma",
-      "email": "donor@eraktkosh.in",
+      "email": "donor@bloodbuddy.org",
       "password": "$2a$10$zTXKMrRE.QIhCMAu2PsuA.SBKFFu28qe/iUifXHwXVwePj7r/Laj2",
       "role": "donor",
       "phone": "+91 98765 43210",
@@ -12,7 +12,7 @@
     {
       "id": "usr-admin-01",
       "name": "Dr. Ananya Sen",
-      "email": "admin@eraktkosh.in",
+      "email": "admin@bloodbuddy.org",
       "password": "$2a$10$u9itoHtn19VSNFrQvDNabOdK0WHJnmhJKHOJicCjwqFtaOfMKPkem",
       "role": "admin",
       "bloodBankId": "bb-delhi-01",
@@ -52,7 +52,7 @@
       "component": "Whole Blood",
       "unitsDonated": 1,
       "donationDate": "2024-11-15",
-      "certificateId": "ERK-CERT-2024-88412",
+      "certificateId": "BB-CERT-2024-88412",
       "verifiedBy": "Dr. Ananya Sen",
       "status": "VERIFIED"
     },
@@ -65,7 +65,7 @@
       "component": "Whole Blood",
       "unitsDonated": 1,
       "donationDate": "2024-07-20",
-      "certificateId": "ERK-CERT-2024-41920",
+      "certificateId": "BB-CERT-2024-41920",
       "verifiedBy": "Dr. Ananya Sen",
       "status": "VERIFIED"
     },
@@ -78,7 +78,7 @@
       "component": "Platelets",
       "unitsDonated": 1,
       "donationDate": "2024-03-10",
-      "certificateId": "ERK-CERT-2024-19402",
+      "certificateId": "BB-CERT-2024-19402",
       "verifiedBy": "Dr. P. Verma",
       "status": "VERIFIED"
     },
@@ -91,7 +91,7 @@
       "component": "Whole Blood",
       "unitsDonated": 1,
       "donationDate": "2023-11-05",
-      "certificateId": "ERK-CERT-2023-99120",
+      "certificateId": "BB-CERT-2023-99120",
       "verifiedBy": "Dr. Ananya Sen",
       "status": "VERIFIED"
     },
@@ -105,7 +105,7 @@
       "component": "Whole Blood",
       "unitsDonated": 1,
       "donationDate": "2026-09-11",
-      "certificateId": "ERK-CERT-2026-94042",
+      "certificateId": "BB-CERT-2026-94042",
       "verifiedBy": "Dr. Ananya Sen"
     }
   ],
@@ -7797,12 +7797,12 @@
     {
       "id": "camp-delhi-01",
       "name": "Gandhi Jayanti Mega Voluntary Blood Drive 2026",
-      "organizer": "Indian Red Cross Society & MoHFW Youth Volunteers",
+      "organizer": "Indian Red Cross Society & BloodBuddy Volunteers",
       "bloodBankId": "bb-delhi-03",
-      "bloodBankName": "Indian Red Cross Society National Blood Center",
+      "bloodBankName": "Indian Red Cross Society Central Blood Center",
       "state": "Delhi",
       "district": "New Delhi",
-      "venue": "Red Cross National Headquarters, 1 Red Cross Road, Mandi House, New Delhi",
+      "venue": "Red Cross Blood Center Headquarters, 1 Red Cross Road, Mandi House, New Delhi",
       "startDate": "2026-10-02",
       "endDate": "2026-10-02",
       "timeSlot": "08:30 AM - 05:00 PM",

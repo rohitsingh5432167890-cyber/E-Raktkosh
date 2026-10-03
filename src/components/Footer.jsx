@@ -1,6 +1,6 @@
 import React from 'react';
 import { useApp } from '../context/AppContext';
-import { Droplets, Heart, Shield, Phone, Mail, MapPin, ExternalLink, Activity } from 'lucide-react';
+import { Droplets, Heart, Shield, Phone, Mail, MapPin, Activity } from 'lucide-react';
 
 export const Footer = () => {
   const { setActiveTab } = useApp();
@@ -10,7 +10,7 @@ export const Footer = () => {
       <div className="container">
         {/* Top Grid */}
         <div className="footer-grid">
-          {/* Column 1: Brand & National Council */}
+          {/* Column 1: Brand */}
           <div className="footer-col">
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', marginBottom: '1rem' }}>
               <div
@@ -29,15 +29,15 @@ export const Footer = () => {
                 <Droplets size={22} color="#ffffff" />
               </div>
               <span style={{ fontSize: '1.25rem', fontWeight: '800', color: 'var(--text-main)', fontFamily: 'var(--font-heading)', letterSpacing: '-0.02em' }}>
-                e-Rakt<span style={{ color: 'var(--primary-light)' }}>Kosh</span>
+                Blood<span style={{ color: 'var(--primary-light)' }}>Buddy</span>
               </span>
             </div>
             <p style={{ lineHeight: '1.6', marginBottom: '1.25rem', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
-              A centralized digital platform to connect, digitize, and streamline blood donation services, real-time inventory verification, and emergency response across India.
+              A centralized digital platform to connect, digitize, and streamline blood donation services, real-time inventory verification, and emergency response.
             </p>
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.45rem', color: '#10b981', fontWeight: '600', fontSize: '0.8rem', background: 'var(--bg-tertiary)', padding: '0.35rem 0.75rem', borderRadius: '6px', border: '1px solid var(--border-color)' }}>
               <Shield size={15} color="#10b981" />
-              <span>Certified Official Blood Portal</span>
+              <span>Verified Blood Care Platform</span>
             </div>
           </div>
 
@@ -60,7 +60,7 @@ export const Footer = () => {
                   className="footer-link-btn"
                   onClick={() => setActiveTab('directory')}
                 >
-                  Licensed Blood Bank Directory
+                  Blood Banks Directory
                 </button>
               </li>
               <li>
@@ -69,7 +69,7 @@ export const Footer = () => {
                   className="footer-link-btn"
                   onClick={() => setActiveTab('camps')}
                 >
-                  Voluntary Blood Donation Camps
+                  Voluntary Blood Donation Drives
                 </button>
               </li>
               <li>
@@ -129,7 +129,7 @@ export const Footer = () => {
             </div>
           </div>
 
-          {/* Column 4: National Helpline & Emergency */}
+          {/* Column 4: Emergency Helpline */}
           <div className="footer-col">
             <h4 className="footer-col-title">Emergency Helpdesk</h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
@@ -153,11 +153,11 @@ export const Footer = () => {
                 <div>
                   <div style={{ fontSize: '0.72rem', color: 'var(--text-dim)', textTransform: 'uppercase', fontWeight: '700' }}>Support Email</div>
                   <a
-                    href="mailto:support@eraktkosh.in"
+                    href="mailto:support@bloodbuddy.org"
                     className="footer-contact-link"
                     title="Tap to email support"
                   >
-                    support@eraktkosh.in
+                    support@bloodbuddy.org
                   </a>
                 </div>
               </div>
@@ -165,7 +165,7 @@ export const Footer = () => {
               <div className="footer-contact-item">
                 <MapPin size={16} color="var(--text-dim)" style={{ marginTop: '0.15rem', flexShrink: 0 }} />
                 <div style={{ fontSize: '0.8rem', lineHeight: '1.4' }}>
-                  <span>National Transfusion Network Headquarters, Nirman Bhawan, New Delhi - 110011</span>
+                  <span>BloodBuddy Transfusion Network Central Registry</span>
                 </div>
               </div>
             </div>
@@ -175,12 +175,12 @@ export const Footer = () => {
         {/* Bottom Bar */}
         <div className="footer-bottom">
           <div>
-            © {new Date().getFullYear()} e-RaktKosh National Blood Transfusion Service. All rights reserved.
+            © {new Date().getFullYear()} BloodBuddy Unified Transfusion Network. All rights reserved.
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', flexWrap: 'wrap', justifyContent: 'center' }}>
-            <span>Built for citizen emergency care with</span>
+            <span>Built for life-saving emergency care with</span>
             <Heart size={14} color="#ef4444" fill="#ef4444" />
-            <span>and Digital Health Standards</span>
+            <span>and modern digital standards</span>
           </div>
         </div>
       </div>

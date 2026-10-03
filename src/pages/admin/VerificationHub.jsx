@@ -93,10 +93,10 @@ export const VerificationHub = () => {
   };
 
   const handleFillDemoDonor = () => {
-    setDonorIdentifier('donor@eraktkosh.in');
+    setDonorIdentifier('donor@bloodbuddy.org');
     setVerifyGroup('O+');
     setVerifyComponent('Whole Blood');
-    showToast('Loaded demo donor Rahul Sharma (donor@eraktkosh.in)', 'info');
+    showToast('Loaded demo donor Rahul Sharma (donor@bloodbuddy.org)', 'info');
   };
 
   const handleVerifyDonation = async (e) => {
@@ -255,7 +255,7 @@ export const VerificationHub = () => {
               <div>
                 <h2 style={{ fontSize: '1.4rem', fontWeight: '700' }}>Donor Transfusion Verification</h2>
                 <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>
-                  Verify donor intake at the blood center or mobile camp to update stock and generate an official MoHFW certificate.
+                  Verify donor intake at the blood center or mobile camp to update stock and generate an official verified certificate.
                 </p>
               </div>
 
@@ -275,7 +275,7 @@ export const VerificationHub = () => {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="e.g. donor@eraktkosh.in or usr-donor-01"
+                  placeholder="e.g. donor@bloodbuddy.org or usr-donor-01"
                   value={donorIdentifier}
                   onChange={(e) => setDonorIdentifier(e.target.value)}
                   required
@@ -591,7 +591,7 @@ export const VerificationHub = () => {
               Sign out of Admin Session?
             </h3>
             <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', lineHeight: '1.5', marginBottom: '1.25rem' }}>
-              You are signed in as <strong>{user?.name || 'Admin'}</strong>. All verified certificates and emergency logs remain saved in the national system.
+              You are signed in as <strong>{user?.name || 'Admin'}</strong>. All verified certificates and emergency logs remain saved in the BloodBuddy registry.
             </p>
             <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center' }}>
               <button

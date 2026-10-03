@@ -17,12 +17,12 @@ export const Login = () => {
     setError('');
     if (demoType === 'donor') {
       setRole('donor');
-      setEmail('donor@eraktkosh.in');
+      setEmail('donor@bloodbuddy.org');
       setPassword('Donor@123');
       showToast('Populated Demo Voluntary Donor credentials.', 'info');
     } else {
       setRole('admin');
-      setEmail('admin@eraktkosh.in');
+      setEmail('admin@bloodbuddy.org');
       setPassword('Admin@123');
       showToast('Populated Demo Blood Bank Admin credentials.', 'info');
     }
@@ -81,7 +81,7 @@ export const Login = () => {
           </div>
           <h2 style={{ fontSize: '1.75rem', fontWeight: '800' }}>Portal Access</h2>
           <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', marginTop: '0.35rem' }}>
-            Sign in to e-RaktKosh National Transfusion Network
+            Sign in to BloodBuddy Transfusion & Donor Network
           </p>
         </div>
 
@@ -191,7 +191,7 @@ export const Login = () => {
             <input
               type="email"
               className="form-control"
-              placeholder={role === 'donor' ? 'donor@eraktkosh.in' : 'admin@eraktkosh.in'}
+              placeholder={role === 'donor' ? 'donor@bloodbuddy.org' : 'admin@bloodbuddy.org'}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required

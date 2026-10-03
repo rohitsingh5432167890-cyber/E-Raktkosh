@@ -61,7 +61,7 @@ export const RegisterDonor = () => {
     try {
       const res = await registerDonor(formData);
       if (res.success) {
-        showToast('Registration successful! Welcome to e-RaktKosh.', 'success');
+        showToast('Registration successful! Welcome to BloodBuddy.', 'success');
         setActiveTab('donor-dashboard');
       }
     } catch (err) {
@@ -101,7 +101,7 @@ export const RegisterDonor = () => {
             </div>
             <h2 style={{ fontSize: '1.85rem', fontWeight: '800' }}>Become a Voluntary Donor</h2>
             <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', marginTop: '0.35rem' }}>
-              Register on India's official National Blood Gateway. One donation can save up to three lives.
+              Register on the BloodBuddy Network. One donation can save up to three lives.
             </p>
           </div>
 
@@ -346,7 +346,7 @@ export const RegisterDonor = () => {
           </form>
 
           <div style={{ textAlign: 'center', marginTop: '1.5rem', fontSize: '0.85rem', color: 'var(--text-muted)' }}>
-            Already registered with e-RaktKosh?{' '}
+            Already registered with BloodBuddy?{' '}
             <a
               href="#login"
               onClick={(e) => { e.preventDefault(); setActiveTab('login'); }}

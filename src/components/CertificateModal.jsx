@@ -53,7 +53,7 @@ export const CertificateModal = ({ isOpen, onClose, certificate }) => {
   const handleDownloadQR = () => {
     if (!qrCodeUrl) return;
     const link = document.createElement('a');
-    link.download = `certificate-qr-${certificate.certificateId}.png`;
+    link.download = `bloodbuddy-cert-${certificate.certificateId}.png`;
     link.href = qrCodeUrl;
     link.click();
   };
@@ -69,8 +69,8 @@ export const CertificateModal = ({ isOpen, onClose, certificate }) => {
   const cert = verificationData || certificate;
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} title="Official Donor Certificate of Appreciation" maxWidth="780px">
-      {/* Verification Success Toast / Notification Banner if tested */}
+    <Modal isOpen={isOpen} onClose={onClose} title="Donor Certificate of Appreciation" maxWidth="780px">
+      {/* Verification Success Toast */}
       {showVerificationReport && (
         <div
           className="no-print"
@@ -88,7 +88,7 @@ export const CertificateModal = ({ isOpen, onClose, certificate }) => {
             <span>QR CODE SCANNED & CRYPTOGRAPHICALLY VALIDATED</span>
           </div>
           <div style={{ fontSize: '0.82rem', color: '#d1fae5', marginTop: '0.4rem', lineHeight: '1.5' }}>
-            Certificate <strong>{cert.certificateId}</strong> is registered to <strong>{cert.donorName}</strong> for voluntary blood donation at <strong>{cert.bloodBankName}</strong>. Verified in National Transfusion Registry with SHA-256 Checksum: <code style={{ color: '#6ee7b7' }}>{cert.verificationHash || 'ERK-VALIDATED-HASH'}</code>.
+            Certificate <strong>{cert.certificateId}</strong> is registered to <strong>{cert.donorName}</strong> for voluntary blood donation at <strong>{cert.bloodBankName}</strong>. Verified in BloodBuddy Registry with SHA-256 Checksum: <code style={{ color: '#6ee7b7' }}>{cert.verificationHash || 'BB-VALIDATED-HASH'}</code>.
           </div>
         </div>
       )}
@@ -108,11 +108,11 @@ export const CertificateModal = ({ isOpen, onClose, certificate }) => {
           textAlign: 'center'
         }}
       >
-        {/* Tricolor top header stripe */}
+        {/* Top header accent stripe */}
         <div
           style={{
             height: '5px',
-            background: 'linear-gradient(90deg, #ff9933 33.3%, #ffffff 33.3%, #ffffff 66.6%, #138808 66.6%)',
+            background: 'linear-gradient(90deg, #8b0000 0%, #c62828 50%, #ef5350 100%)',
             position: 'absolute',
             top: 0,
             left: 0,
@@ -123,10 +123,10 @@ export const CertificateModal = ({ isOpen, onClose, certificate }) => {
         {/* Header Branding */}
         <div style={{ marginBottom: '1.25rem' }}>
           <div style={{ fontSize: '0.78rem', letterSpacing: '0.14em', color: '#6b7280', textTransform: 'uppercase', fontWeight: '700' }}>
-            Ministry of Health and Family Welfare | Government of India
+            BLOODBUDDY TRANSFUSION & DONOR NETWORK
           </div>
           <div style={{ fontSize: '1.15rem', fontWeight: '800', color: '#8b0000', letterSpacing: '0.04em', marginTop: '0.2rem' }}>
-            NATIONAL BLOOD TRANSFUSION COUNCIL (NBTC) & e-RaktKosh
+            CERTIFIED VOLUNTARY BLOOD DONATION REGISTRY
           </div>
         </div>
 
@@ -226,7 +226,7 @@ export const CertificateModal = ({ isOpen, onClose, certificate }) => {
               </div>
               <div>Cert: <strong style={{ color: '#111827', fontFamily: 'monospace' }}>{cert.certificateId}</strong></div>
               <div style={{ fontSize: '0.68rem', color: '#059669', fontWeight: '600', marginTop: '0.2rem' }}>
-                ✓ MoHFW Cryptographic Seal
+                ✓ BloodBuddy Verified Seal
               </div>
             </div>
           </div>
@@ -284,7 +284,7 @@ export const CertificateModal = ({ isOpen, onClose, certificate }) => {
           disabled={isVerifying}
         >
           <ShieldCheck size={15} />
-          {isVerifying ? 'Checking National Registry...' : 'Simulate Live QR Scan & Authenticate'}
+          {isVerifying ? 'Checking BloodBuddy Registry...' : 'Simulate Live QR Scan & Authenticate'}
         </button>
 
         <div style={{ display: 'flex', gap: '0.65rem' }}>

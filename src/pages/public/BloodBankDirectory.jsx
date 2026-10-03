@@ -58,11 +58,11 @@ export const BloodBankDirectory = () => {
         {/* Header */}
         <div style={{ textAlign: 'center', maxWidth: '750px', margin: '0 auto 2.5rem auto' }}>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', color: 'var(--primary-light)', fontWeight: '700', fontSize: '0.85rem', marginBottom: '0.5rem' }}>
-            <Building2 size={16} /> National Blood Bank Directory
+            <Building2 size={16} /> Blood Banks & Centers Directory
           </div>
-          <h1 style={{ fontSize: '2.2rem', fontWeight: '800' }}>Licensed Blood Transfusion Centers</h1>
+          <h1 style={{ fontSize: '2.2rem', fontWeight: '800' }}>Verified Blood Transfusion Centers</h1>
           <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem' }}>
-            Official registry of CDSCO-licensed apex hospitals, regional blood centers, and voluntary transfusion facilities.
+            Comprehensive registry of verified partner hospitals, regional blood centers, and voluntary transfusion facilities.
           </p>
         </div>
 

@@ -189,8 +189,8 @@ export const handleMockRequest = async (endpoint, options = {}) => {
     }
 
     // Password verification: support demo accounts or direct passwords
-    const isDemoDonor = user.email.toLowerCase() === 'donor@eraktkosh.in' && password === 'Donor@123';
-    const isDemoAdmin = (user.email.toLowerCase() === 'admin@eraktkosh.in' || user.email.toLowerCase() === 'admin@aiims.edu') && password === 'Admin@123';
+    const isDemoDonor = (user.email.toLowerCase() === 'donor@bloodbuddy.org' || user.email.toLowerCase() === 'donor@eraktkosh.in') && password === 'Donor@123';
+    const isDemoAdmin = (user.email.toLowerCase() === 'admin@bloodbuddy.org' || user.email.toLowerCase() === 'admin@eraktkosh.in' || user.email.toLowerCase() === 'admin@aiims.edu') && password === 'Admin@123';
     const isMatch = isDemoDonor || isDemoAdmin || user.password === password || password === 'Donor@123' || password === 'Admin@123';
 
     if (!isMatch) {
@@ -301,7 +301,7 @@ export const handleMockRequest = async (endpoint, options = {}) => {
 
     return {
       success: true,
-      message: 'Donor account successfully registered with e-RaktKosh.',
+      message: 'Donor account successfully registered with BloodBuddy.',
       token,
       user: sanitizeUser(newUser),
       profile: newProfile
@@ -440,7 +440,7 @@ export const handleMockRequest = async (endpoint, options = {}) => {
     const badge = determineBadge(profile.totalDonations || 0);
 
     const passPayload = {
-      title: 'MoHFW e-RaktKosh Verified Donor Pass',
+      title: 'BloodBuddy Verified Digital Donor Pass',
       donorId: user.id,
       name: user.name,
       bloodGroup: profile.bloodGroup || 'O+',
@@ -450,7 +450,7 @@ export const handleMockRequest = async (endpoint, options = {}) => {
       badge: badge,
       state: profile.state || 'Delhi',
       issuedAt: new Date().toISOString(),
-      verifyPortal: 'https://eraktkosh.in/verify-pass/' + user.id
+      verifyPortal: 'https://bloodbuddy.org/verify-pass/' + user.id
     };
 
     const qrCodeDataUrl = await generateQRCode(passPayload);
@@ -623,13 +623,13 @@ export const handleMockRequest = async (endpoint, options = {}) => {
 
     const year = new Date().getFullYear();
     const randomSuffix = Math.floor(10000 + Math.random() * 90000);
-    const certificateId = `ERK-CERT-${year}-${randomSuffix}`;
+    const certificateId = `BB-CERT-${year}-${randomSuffix}`;
     const donationDate = new Date().toISOString().split('T')[0];
 
     const verificationHash = await sha256Hex(`${certificateId}:${donor.id}:${donationDate}`);
 
     const qrPayload = {
-      standard: 'MoHFW_ERAKTKOSH_CERT_V1',
+      standard: 'BLOODBUDDY_CERT_V1',
       certificateId,
       donor: donor.name,
       bloodGroup: bloodGroup || 'O+',
@@ -637,7 +637,7 @@ export const handleMockRequest = async (endpoint, options = {}) => {
       component,
       date: donationDate,
       hash: verificationHash,
-      verificationUrl: `https://eraktkosh.in/verify-cert/${certificateId}`
+      verificationUrl: `https://bloodbuddy.org/verify-cert/${certificateId}`
     };
 
     const qrCodeDataUrl = await generateQRCode(qrPayload);
@@ -653,7 +653,7 @@ export const handleMockRequest = async (endpoint, options = {}) => {
       verifiedBy: user.name || 'Dr. Ananya Sen',
       issuedAt: new Date().toISOString(),
       verificationHash,
-      authorizedBy: 'Ministry of Health and Family Welfare (MoHFW), Govt. of India',
+      authorizedBy: 'BloodBuddy Transfusion Network & Donor Council',
       verificationUrl: qrPayload.verificationUrl,
       qrCode: qrCodeDataUrl
     };
@@ -839,7 +839,7 @@ export const handleMockRequest = async (endpoint, options = {}) => {
   if (cleanEndpoint === '/public/health' && method === 'GET') {
     return {
       status: 'UP',
-      service: 'e-RaktKosh Connect National Portal (Standalone)',
+      service: 'BloodBuddy Connect Transfusion Network (Standalone)',
       timestamp: new Date().toISOString(),
       version: '1.0.0'
     };
@@ -1095,8 +1095,8 @@ export const handleMockRequest = async (endpoint, options = {}) => {
       if (donorUser) {
         donorName = donorUser.name;
       }
-    } else if (!certIdUpper.startsWith('ERK-CERT-')) {
-      const err = new Error('Certificate not found in the e-RaktKosh National Transfusion Registry.');
+    } else if (!certIdUpper.startsWith('BB-CERT-') && !certIdUpper.startsWith('ERK-CERT-')) {
+      const err = new Error('Certificate not found in the BloodBuddy Transfusion Registry.');
       err.status = 404;
       err.data = { success: false, verified: false };
       throw err;
@@ -1105,7 +1105,7 @@ export const handleMockRequest = async (endpoint, options = {}) => {
     const verificationHash = await sha256Hex(`${certIdUpper}:${donorId}:${donationDate}`);
 
     const qrPayload = {
-      standard: 'MoHFW_ERAKTKOSH_CERT_V1',
+      standard: 'BLOODBUDDY_CERT_V1',
       certificateId: certIdUpper,
       donor: donorName,
       bloodGroup,
@@ -1113,7 +1113,7 @@ export const handleMockRequest = async (endpoint, options = {}) => {
       component,
       date: donationDate,
       hash: verificationHash,
-      verificationUrl: `https://eraktkosh.in/verify-cert/${certIdUpper}`
+      verificationUrl: `https://bloodbuddy.org/verify-cert/${certIdUpper}`
     };
 
     const qrCodeDataUrl = await generateQRCode(qrPayload);
@@ -1129,7 +1129,7 @@ export const handleMockRequest = async (endpoint, options = {}) => {
       verifiedBy,
       issuedAt: new Date().toISOString(),
       verificationHash,
-      authorizedBy: 'Ministry of Health and Family Welfare (MoHFW), Govt. of India',
+      authorizedBy: 'BloodBuddy Transfusion Network & Donor Council',
       verificationUrl: qrPayload.verificationUrl,
       qrCode: qrCodeDataUrl
     };

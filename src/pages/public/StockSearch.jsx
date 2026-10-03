@@ -87,9 +87,9 @@ export const StockSearch = () => {
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', color: 'var(--primary-light)', fontWeight: '700', fontSize: '0.85rem', marginBottom: '0.5rem' }}>
             <Search size={16} /> Real-time Blood Stock Availability
           </div>
-          <h1 style={{ fontSize: '2.2rem', fontWeight: '800' }}>National Blood Inventory Search</h1>
+          <h1 style={{ fontSize: '2.2rem', fontWeight: '800' }}>Live Blood Inventory Search</h1>
           <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem' }}>
-            Verify real-time unit counts across licensed hospital blood banks before visiting.
+            Verify real-time unit counts across verified hospital blood centers before visiting.
           </p>
         </div>
 
@@ -188,7 +188,7 @@ export const StockSearch = () => {
         {/* Stock Cards Grid */}
         {loading ? (
           <div className="glass-card" style={{ padding: '3rem', textAlign: 'center', color: 'var(--text-muted)' }}>
-            Searching national inventory database...
+            Searching live network inventory database...
           </div>
         ) : stocks.length === 0 ? (
           <div className="glass-card" style={{ padding: '3rem', textAlign: 'center' }}>
