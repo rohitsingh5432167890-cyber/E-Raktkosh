@@ -112,6 +112,19 @@ input, select, textarea {
   padding-bottom: 4rem;
 }
 
+/* Landing Hero Section */
+.landing-hero {
+  position: relative;
+  background-image: linear-gradient(180deg, rgba(11, 15, 23, 0.82) 0%, rgba(11, 15, 23, 0.90) 100%), url('/hero-bg.jpg');
+  background-size: cover;
+  background-position: center 35%;
+  background-repeat: no-repeat;
+}
+
+[data-theme='light'] .landing-hero {
+  background-image: linear-gradient(180deg, rgba(15, 23, 42, 0.82) 0%, rgba(15, 23, 42, 0.90) 100%), url('/hero-bg.jpg');
+}
+
 /* Brand Accent Stripe */
 .brand-accent-stripe {
   height: 4px;
@@ -603,6 +616,114 @@ input, select, textarea {
   gap: 1rem;
   font-size: 0.78rem;
   color: var(--text-dim);
+}
+
+/* Navbar Desktop & Mobile Layout */
+.nav-desktop-links {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.nav-mobile-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 0.4rem 0.5rem;
+  border-radius: var(--radius-sm);
+  background: var(--bg-tertiary);
+  color: var(--text-main);
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  margin-left: 0.25rem;
+}
+
+.nav-mobile-drawer {
+  background: var(--bg-nav);
+  border-top: 1px solid var(--border-color);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  box-shadow: var(--shadow-lg);
+  animation: fadeInDown 0.15s ease-out;
+}
+
+.user-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  width: 260px;
+  max-width: 90vw;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  z-index: 1100;
+  overflow: hidden;
+  animation: fadeInDown 0.15s ease-out;
+}
+
+.user-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  width: 100%;
+  padding: 0.65rem 1rem;
+  font-size: 0.85rem;
+  color: var(--text-main);
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.user-dropdown-item:hover {
+  background-color: var(--bg-card-hover);
+  color: var(--primary-light);
+}
+
+.user-dropdown-item.danger-item {
+  color: #ef4444;
+}
+
+.user-dropdown-item.danger-item:hover {
+  background-color: rgba(239, 68, 68, 0.12);
+  color: #f87171;
+}
+
+.dropdown-divider {
+  height: 1px;
+  background: var(--border-color);
+  margin: 0.25rem 0;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Navbar Breakdown */
+@media (max-width: 1140px) {
+  .nav-desktop-links {
+    display: none !important;
+  }
+  .nav-desktop-shortcut {
+    display: none !important;
+  }
+  .nav-desktop-logout {
+    display: none !important;
+  }
+  .nav-mobile-toggle {
+    display: inline-flex !important;
+  }
 }
 
 /* Mobile & Phone Specific Responsiveness */

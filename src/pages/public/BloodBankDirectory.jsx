@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { publicApi } from '../../api/publicApi';
 import { useApp } from '../../context/AppContext';
+import { ALL_INDIAN_STATES } from '../../constants/indiaData';
 import { Building2, Search, MapPin, Phone, ShieldCheck, Clock, CheckCircle2, Award } from 'lucide-react';
 
 export const BloodBankDirectory = () => {
-  const { setActiveTab } = useApp();
+  const { setActiveTab, t } = useApp();
 
-  const [states, setStates] = useState([]);
+  const [states, setStates] = useState(ALL_INDIAN_STATES);
   const [selectedState, setSelectedState] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
   const [bloodBanks, setBloodBanks] = useState([]);
@@ -20,8 +21,8 @@ export const BloodBankDirectory = () => {
   const fetchStates = async () => {
     try {
       const res = await publicApi.getStates();
-      if (res.success) {
-        setStates(res.states || []);
+      if (res.success && res.states?.length > 0) {
+        setStates(res.states);
       }
     } catch (err) {
       console.error(err);
@@ -58,11 +59,11 @@ export const BloodBankDirectory = () => {
         {/* Header */}
         <div style={{ textAlign: 'center', maxWidth: '750px', margin: '0 auto 2.5rem auto' }}>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', color: 'var(--primary-light)', fontWeight: '700', fontSize: '0.85rem', marginBottom: '0.5rem' }}>
-            <Building2 size={16} /> Blood Banks & Centers Directory
+            <Building2 size={16} /> {t('bloodBankDirectory')}
           </div>
-          <h1 style={{ fontSize: '2.2rem', fontWeight: '800' }}>Verified Blood Transfusion Centers</h1>
+          <h1 style={{ fontSize: '2.2rem', fontWeight: '800' }}>{t('directoryTitle')}</h1>
           <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem' }}>
-            Comprehensive registry of verified partner hospitals, regional blood centers, and voluntary transfusion facilities.
+            {t('directorySubtitle')}
           </p>
         </div>
 
@@ -77,13 +78,13 @@ export const BloodBankDirectory = () => {
         >
           <form onSubmit={handleSearchSubmit} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1rem', alignItems: 'flex-end' }}>
             <div className="form-group" style={{ marginBottom: 0 }}>
-              <label className="form-label">Filter by State</label>
+              <label className="form-label">{t('selectState')}</label>
               <select
                 className="form-control"
                 value={selectedState}
                 onChange={(e) => handleStateChange(e.target.value)}
               >
-                <option value="">All Indian States</option>
+                <option value="">{t('allStates')}</option>
                 {states.map(s => (
                   <option key={s} value={s}>{s}</option>
                 ))}
@@ -91,18 +92,18 @@ export const BloodBankDirectory = () => {
             </div>
 
             <div className="form-group" style={{ marginBottom: 0 }}>
-              <label className="form-label">Search by Hospital / Center Name</label>
+              <label className="form-label">{t('searchPlaceholder')}</label>
               <input
                 type="text"
                 className="form-control"
-                placeholder="e.g. AIIMS, Safdarjung, Red Cross..."
+                placeholder={t('searchPlaceholder')}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
             </div>
 
             <button type="submit" className="btn btn-primary" style={{ height: '44px' }}>
-              <Search size={16} /> Search Centers
+              <Search size={16} /> {t('searchInventory')}
             </button>
           </form>
         </div>
@@ -110,7 +111,7 @@ export const BloodBankDirectory = () => {
         {/* Directory Grid */}
         {loading ? (
           <div className="glass-card" style={{ padding: '3rem', textAlign: 'center', color: 'var(--text-muted)' }}>
-            Loading licensed centers...
+            {t('loading')}
           </div>
         ) : (
           <div
@@ -133,10 +134,10 @@ export const BloodBankDirectory = () => {
               >
                 <div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.75rem' }}>
-                    <span className="badge badge-gov">{bb.category || 'Licensed Center'}</span>
+                    <span className="badge badge-gov">{bb.category || t('licensedCenter')}</span>
                     {bb.is24x7 && (
                       <span className="badge badge-success" style={{ fontSize: '0.72rem' }}>
-                        <Clock size={12} /> 24x7 Open
+                        <Clock size={12} /> {t('open24x7')}
                       </span>
                     )}
                   </div>
@@ -147,7 +148,7 @@ export const BloodBankDirectory = () => {
 
                   <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.4rem', color: 'var(--text-muted)', fontSize: '0.85rem', marginBottom: '1rem' }}>
                     <MapPin size={15} style={{ marginTop: '0.2rem', flexShrink: 0 }} />
-                    <span>{bb.address}, {bb.district}, {bb.state} - {bb.pincode}</span>
+                    <span>{bb.address || `${bb.district}, ${bb.state}`}</span>
                   </div>
 
                   {/* Badges / Features */}
@@ -157,13 +158,8 @@ export const BloodBankDirectory = () => {
                         ✓ Components Facility
                       </span>
                     )}
-                    {bb.hasAphaeresis && (
-                      <span style={{ fontSize: '0.72rem', background: 'var(--bg-tertiary)', padding: '0.2rem 0.5rem', borderRadius: '4px', border: '1px solid var(--border-color)' }}>
-                        ✓ Apheresis (Single Donor)
-                      </span>
-                    )}
                     <span style={{ fontSize: '0.72rem', color: 'var(--text-dim)', fontFamily: 'monospace' }}>
-                      Lic: {bb.licenseNumber}
+                      Lic: {bb.licenseNumber || 'BB-LIC-REG'}
                     </span>
                   </div>
                 </div>
@@ -171,21 +167,21 @@ export const BloodBankDirectory = () => {
                 {/* Contacts & Action */}
                 <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem' }}>
                   <div style={{ fontSize: '0.82rem' }}>
-                    <div style={{ color: 'var(--text-muted)' }}>Helpline / Direct:</div>
-                    <strong style={{ color: 'var(--text-main)' }}>{bb.helpline || bb.phone}</strong>
+                    <div style={{ color: 'var(--text-muted)' }}>Helpline:</div>
+                    <strong style={{ color: 'var(--text-main)' }}>{bb.helpline || bb.phone || '1910'}</strong>
                   </div>
 
                   <div style={{ display: 'flex', gap: '0.5rem' }}>
                     {bb.phone && (
                       <a href={`tel:${bb.phone}`} className="btn btn-secondary btn-sm">
-                        <Phone size={14} color="#ef4444" /> Call
+                        <Phone size={14} color="#ef4444" /> {t('callNow')}
                       </a>
                     )}
                     <button
                       className="btn btn-primary btn-sm"
                       onClick={() => setActiveTab('stock-search')}
                     >
-                      View Stock
+                      {t('navStockSearch')}
                     </button>
                   </div>
                 </div>

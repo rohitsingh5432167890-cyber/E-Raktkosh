@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { publicApi } from '../../api/publicApi';
 import { useApp } from '../../context/AppContext';
+import { ALL_INDIAN_STATES } from '../../constants/indiaData';
 import Modal from '../../components/Modal';
 import {
   AlertTriangle,
@@ -17,7 +18,7 @@ import {
 
 const BLOOD_GROUPS = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
 const COMPONENTS = ['Whole Blood', 'PRBC', 'FFP', 'Platelets', 'SDP', 'Cryoprecipitate'];
-const INDIAN_STATES = ['Delhi', 'Maharashtra', 'Karnataka', 'Tamil Nadu', 'West Bengal', 'Uttar Pradesh', 'Telangana'];
+const INDIAN_STATES = ALL_INDIAN_STATES;
 
 export const EmergencySOS = () => {
   const { showToast, refreshEmergencyAlerts } = useApp();

@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { publicApi } from '../../api/publicApi';
 import { useApp } from '../../context/AppContext';
+import { ALL_INDIAN_STATES } from '../../constants/indiaData';
 import { Search, Building2, Phone, MapPin, Clock, AlertTriangle, ShieldCheck, Filter } from 'lucide-react';
 
 const BLOOD_GROUPS = ['ALL', 'A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
 const COMPONENTS = ['ALL', 'Whole Blood', 'PRBC', 'FFP', 'Platelets', 'SDP', 'Cryoprecipitate'];
 
 export const StockSearch = () => {
-  const { showToast } = useApp();
+  const { showToast, t } = useApp();
 
-  const [states, setStates] = useState([]);
+  const [states, setStates] = useState(ALL_INDIAN_STATES);
   const [districts, setDistricts] = useState([]);
   const [selectedState, setSelectedState] = useState('Delhi');
   const [selectedDistrict, setSelectedDistrict] = useState('');
@@ -28,6 +29,9 @@ export const StockSearch = () => {
   useEffect(() => {
     if (selectedState) {
       fetchDistricts(selectedState);
+    } else {
+      setDistricts([]);
+      setSelectedDistrict('');
     }
   }, [selectedState]);
 
@@ -39,8 +43,8 @@ export const StockSearch = () => {
   const fetchStates = async () => {
     try {
       const res = await publicApi.getStates();
-      if (res.success) {
-        setStates(res.states || []);
+      if (res.success && res.states?.length > 0) {
+        setStates(res.states);
       }
     } catch (err) {
       console.error('Failed to load states:', err);
@@ -85,11 +89,11 @@ export const StockSearch = () => {
         {/* Header */}
         <div style={{ textAlign: 'center', maxWidth: '750px', margin: '0 auto 2.5rem auto' }}>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', color: 'var(--primary-light)', fontWeight: '700', fontSize: '0.85rem', marginBottom: '0.5rem' }}>
-            <Search size={16} /> Real-time Blood Stock Availability
+            <Search size={16} /> {t('instantStockLookup')}
           </div>
-          <h1 style={{ fontSize: '2.2rem', fontWeight: '800' }}>Live Blood Inventory Search</h1>
+          <h1 style={{ fontSize: '2.2rem', fontWeight: '800' }}>{t('liveInventoryTitle')}</h1>
           <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem' }}>
-            Verify real-time unit counts across verified hospital blood centers before visiting.
+            {t('liveInventorySubtitle')}
           </p>
         </div>
 
@@ -106,13 +110,13 @@ export const StockSearch = () => {
           {/* Location Cascading Dropdowns */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem', marginBottom: '1.25rem' }}>
             <div className="form-group" style={{ marginBottom: 0 }}>
-              <label className="form-label">State / UT</label>
+              <label className="form-label">{t('selectState')}</label>
               <select
                 className="form-control"
                 value={selectedState}
                 onChange={(e) => setSelectedState(e.target.value)}
               >
-                <option value="">All States / UTs</option>
+                <option value="">{t('allStates')}</option>
                 {states.map(st => (
                   <option key={st} value={st}>{st}</option>
                 ))}
@@ -120,14 +124,14 @@ export const StockSearch = () => {
             </div>
 
             <div className="form-group" style={{ marginBottom: 0 }}>
-              <label className="form-label">District</label>
+              <label className="form-label">{t('selectDistrict')}</label>
               <select
                 className="form-control"
                 value={selectedDistrict}
                 onChange={(e) => setSelectedDistrict(e.target.value)}
                 disabled={!selectedState}
               >
-                <option value="">All Districts in {selectedState || 'State'}</option>
+                <option value="">{selectedState ? `${t('allDistricts')} in ${selectedState}` : t('allDistricts')}</option>
                 {districts.map(dt => (
                   <option key={dt} value={dt}>{dt}</option>
                 ))}
@@ -135,13 +139,14 @@ export const StockSearch = () => {
             </div>
 
             <div className="form-group" style={{ marginBottom: 0 }}>
-              <label className="form-label">Blood Component</label>
+              <label className="form-label">{t('component')}</label>
               <select
                 className="form-control"
                 value={selectedComponent}
                 onChange={(e) => setSelectedComponent(e.target.value)}
               >
-                {COMPONENTS.map(c => (
+                <option value="ALL">{t('allComponents')}</option>
+                {COMPONENTS.filter(c => c !== 'ALL').map(c => (
                   <option key={c} value={c}>{c}</option>
                 ))}
               </select>
@@ -151,7 +156,7 @@ export const StockSearch = () => {
           {/* Blood Group Chips */}
           <div>
             <label className="form-label" style={{ marginBottom: '0.5rem' }}>
-              Filter by Blood Group
+              {t('bloodGroup')}
             </label>
             <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
               {BLOOD_GROUPS.map(bg => (
@@ -171,7 +176,7 @@ export const StockSearch = () => {
                     transition: 'all 0.15s ease'
                   }}
                 >
-                  {bg}
+                  {bg === 'ALL' ? t('allGroups') : bg}
                 </button>
               ))}
             </div>
@@ -181,21 +186,21 @@ export const StockSearch = () => {
         {/* Results Header */}
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem' }}>
           <div style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>
-            Showing <strong>{stocks.length}</strong> matching stock records
+            Showing <strong>{stocks.length}</strong> {t('unitsInStock')}
           </div>
         </div>
 
         {/* Stock Cards Grid */}
         {loading ? (
           <div className="glass-card" style={{ padding: '3rem', textAlign: 'center', color: 'var(--text-muted)' }}>
-            Searching live network inventory database...
+            {t('loading')}
           </div>
         ) : stocks.length === 0 ? (
           <div className="glass-card" style={{ padding: '3rem', textAlign: 'center' }}>
             <AlertTriangle size={36} color="#f59e0b" style={{ margin: '0 auto 1rem auto' }} />
-            <h3 style={{ fontSize: '1.2rem', marginBottom: '0.5rem' }}>No matching stock found</h3>
+            <h3 style={{ fontSize: '1.2rem', marginBottom: '0.5rem' }}>{t('noStockFound')}</h3>
             <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>
-              Try broadening your search criteria or requesting blood via our Emergency SOS board.
+              Try selecting another state or requesting units via our Emergency SOS board.
             </p>
           </div>
         ) : (
@@ -228,9 +233,9 @@ export const StockSearch = () => {
                     </div>
 
                     {item.isLow ? (
-                      <span className="badge badge-urgent">Low Stock</span>
+                      <span className="badge badge-urgent">{t('lowStock')}</span>
                     ) : (
-                      <span className="badge badge-success">Available</span>
+                      <span className="badge badge-success">{t('available')}</span>
                     )}
                   </div>
 
@@ -240,14 +245,14 @@ export const StockSearch = () => {
                       {item.units}
                     </span>
                     <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginLeft: '0.35rem' }}>
-                      units in stock
+                      {t('units')}
                     </span>
                   </div>
 
                   {/* Blood Bank Info */}
                   <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: '0.85rem', fontSize: '0.82rem' }}>
                     <div style={{ fontWeight: '700', color: 'var(--text-main)', marginBottom: '0.25rem' }}>
-                      {item.bloodBankName}
+                      {item.bloodBank?.name || item.bloodBankName || `${item.state} Blood Center`}
                     </div>
                     <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.35rem', color: 'var(--text-muted)', marginBottom: '0.35rem' }}>
                       <MapPin size={13} style={{ marginTop: '0.2rem', flexShrink: 0 }} />
@@ -255,7 +260,7 @@ export const StockSearch = () => {
                     </div>
                     {item.bloodBank?.is24x7 && (
                       <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', color: '#10b981', fontSize: '0.75rem', fontWeight: '600' }}>
-                        <Clock size={12} /> 24x7 Emergency Service
+                        <Clock size={12} /> {t('open24x7')}
                       </div>
                     )}
                   </div>
@@ -264,7 +269,7 @@ export const StockSearch = () => {
                 {/* Contact CTA */}
                 <div style={{ marginTop: '1.25rem', paddingTop: '0.75rem', borderTop: '1px solid var(--border-color)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <span style={{ fontSize: '0.75rem', color: 'var(--text-dim)' }}>
-                    {item.lastUpdated ? `Updated ${new Date(item.lastUpdated).toLocaleDateString()}` : 'Live'}
+                    {item.lastUpdated ? `${t('lastUpdated')}: ${new Date(item.lastUpdated).toLocaleDateString()}` : 'Live'}
                   </span>
                   {item.bloodBank?.phone && (
                     <a
@@ -272,7 +277,7 @@ export const StockSearch = () => {
                       className="btn btn-secondary btn-sm"
                       style={{ fontSize: '0.78rem', display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}
                     >
-                      <Phone size={13} color="#ef4444" /> Call Center
+                      <Phone size={13} color="#ef4444" /> {t('callNow')}
                     </a>
                   )}
                 </div>

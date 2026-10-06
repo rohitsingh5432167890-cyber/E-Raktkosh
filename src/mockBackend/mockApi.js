@@ -1,5 +1,6 @@
 import initialSeedData from './initialData.json';
 import QRCode from 'qrcode';
+import { ALL_INDIAN_STATES, STATE_DISTRICTS_MAP } from '../constants/indiaData';
 
 const STORAGE_KEY = 'eraktkosh_db_v2';
 const CURRENT_USER_KEY = 'eraktkosh_current_user';
@@ -875,20 +876,104 @@ export const handleMockRequest = async (endpoint, options = {}) => {
     };
   }
 
+  // Helper to ensure inventory exists for any Indian state
+  const ensureStateData = (stateName) => {
+    if (!stateName) return;
+    const existing = (db.bloodBanks || []).some(b => b.state?.toLowerCase() === stateName.toLowerCase());
+    if (!existing) {
+      const districts = STATE_DISTRICTS_MAP[stateName] || [`Central ${stateName}`, `North ${stateName}`];
+      const primaryDistrict = districts[0] || 'Main District';
+      const cleanId = stateName.toLowerCase().replace(/[^a-z0-9]/g, '-');
+
+      const newBB1 = {
+        id: `bb-auto-${cleanId}-01`,
+        name: `${stateName} Medical Center & Blood Bank`,
+        licenseNumber: `BB-LIC-${cleanId.toUpperCase().slice(0, 4)}-2024`,
+        state: stateName,
+        district: primaryDistrict,
+        city: primaryDistrict,
+        address: `Civil Hospital Complex, ${primaryDistrict}, ${stateName}`,
+        pincode: '400001',
+        phone: '+91-98765-43210',
+        helpline: '1910',
+        email: `bloodbank.${cleanId}@gov.in`,
+        category: 'Government Hospital',
+        is24x7: true,
+        hasComponentFacility: true,
+        totalUnits: 140,
+        openTime: '24 Hours',
+        status: 'VERIFIED'
+      };
+
+      const newBB2 = {
+        id: `bb-auto-${cleanId}-02`,
+        name: `Red Cross Voluntary Blood Center, ${stateName}`,
+        licenseNumber: `BB-LIC-${cleanId.toUpperCase().slice(0, 4)}-9981`,
+        state: stateName,
+        district: districts[1] || primaryDistrict,
+        city: districts[1] || primaryDistrict,
+        address: `Red Cross Complex, MG Road, ${districts[1] || primaryDistrict}, ${stateName}`,
+        pincode: '400002',
+        phone: '+91-98111-22334',
+        helpline: '1910',
+        email: `redcross.${cleanId}@redcross.org`,
+        category: 'Charitable / Red Cross',
+        is24x7: true,
+        hasComponentFacility: true,
+        totalUnits: 98,
+        openTime: '24 Hours',
+        status: 'VERIFIED'
+      };
+
+      if (!db.bloodBanks) db.bloodBanks = [];
+      db.bloodBanks.push(newBB1, newBB2);
+
+      const bloodGroups = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
+      const components = ['Whole Blood', 'PRBC', 'FFP', 'Platelets', 'SDP'];
+
+      if (!db.stocks) db.stocks = [];
+      [newBB1, newBB2].forEach(bb => {
+        bloodGroups.forEach(bg => {
+          components.forEach(comp => {
+            const units = Math.floor(Math.random() * 26) + 5;
+            db.stocks.push({
+              id: `stk-${bb.id}-${bg}-${comp.toLowerCase()}`,
+              bloodBankId: bb.id,
+              state: stateName,
+              district: bb.district,
+              bloodGroup: bg,
+              component: comp,
+              units,
+              threshold: 5,
+              isLow: units <= 5,
+              lastUpdated: new Date().toISOString()
+            });
+          });
+        });
+      });
+
+      saveDB(db);
+    }
+  };
+
   // GET /public/states
   if (cleanEndpoint === '/public/states' && method === 'GET') {
-    const states = [...new Set((db.bloodBanks || []).map(b => b.state))].sort();
     return {
       success: true,
-      states
+      states: ALL_INDIAN_STATES
     };
   }
 
   // GET /public/districts
   if (cleanEndpoint === '/public/districts' && method === 'GET') {
     const state = params.state;
-    const filtered = (db.bloodBanks || []).filter(b => !state || b.state?.toLowerCase() === state.toLowerCase());
-    const districts = [...new Set(filtered.map(b => b.district))].sort();
+    let districts = [];
+    if (state && STATE_DISTRICTS_MAP[state]) {
+      districts = STATE_DISTRICTS_MAP[state];
+    } else if (state) {
+      const filtered = (db.bloodBanks || []).filter(b => b.state?.toLowerCase() === state.toLowerCase());
+      districts = [...new Set(filtered.map(b => b.district))].sort();
+    }
     return {
       success: true,
       state,
@@ -899,6 +984,7 @@ export const handleMockRequest = async (endpoint, options = {}) => {
   // GET /public/stock
   if (cleanEndpoint === '/public/stock' && method === 'GET') {
     const { state, district, bloodGroup, component, isLow } = params;
+    if (state) ensureStateData(state);
 
     let filtered = db.stocks || [];
     if (state) filtered = filtered.filter(s => s.state?.toLowerCase() === state.toLowerCase());
@@ -932,6 +1018,7 @@ export const handleMockRequest = async (endpoint, options = {}) => {
   // GET /public/blood-banks
   if (cleanEndpoint === '/public/blood-banks' && method === 'GET') {
     const { state, district, query } = params;
+    if (state) ensureStateData(state);
 
     let results = db.bloodBanks || [];
     if (state) results = results.filter(b => b.state?.toLowerCase() === state.toLowerCase());

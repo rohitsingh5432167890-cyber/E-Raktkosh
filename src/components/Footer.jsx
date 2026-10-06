@@ -3,7 +3,7 @@ import { useApp } from '../context/AppContext';
 import { Droplets, Heart, Shield, Phone, Mail, MapPin, Activity } from 'lucide-react';
 
 export const Footer = () => {
-  const { setActiveTab } = useApp();
+  const { setActiveTab, t } = useApp();
 
   return (
     <footer className="footer-main">
@@ -33,17 +33,17 @@ export const Footer = () => {
               </span>
             </div>
             <p style={{ lineHeight: '1.6', marginBottom: '1.25rem', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
-              A centralized digital platform to connect, digitize, and streamline blood donation services, real-time inventory verification, and emergency response.
+              {t('ecosystemSubtitle')}
             </p>
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.45rem', color: '#10b981', fontWeight: '600', fontSize: '0.8rem', background: 'var(--bg-tertiary)', padding: '0.35rem 0.75rem', borderRadius: '6px', border: '1px solid var(--border-color)' }}>
               <Shield size={15} color="#10b981" />
-              <span>Verified Blood Care Platform</span>
+              <span>{t('govInitiative')}</span>
             </div>
           </div>
 
           {/* Column 2: Quick Links */}
           <div className="footer-col">
-            <h4 className="footer-col-title">Services & Portals</h4>
+            <h4 className="footer-col-title">{t('quickLinks')}</h4>
             <ul className="footer-links-list">
               <li>
                 <button
@@ -51,7 +51,7 @@ export const Footer = () => {
                   className="footer-link-btn"
                   onClick={() => setActiveTab('stock-search')}
                 >
-                  Real-time Blood Stock Search
+                  {t('navStockSearch')}
                 </button>
               </li>
               <li>
@@ -60,7 +60,7 @@ export const Footer = () => {
                   className="footer-link-btn"
                   onClick={() => setActiveTab('directory')}
                 >
-                  Blood Banks Directory
+                  {t('navBloodBanks')}
                 </button>
               </li>
               <li>
@@ -69,7 +69,7 @@ export const Footer = () => {
                   className="footer-link-btn"
                   onClick={() => setActiveTab('camps')}
                 >
-                  Voluntary Blood Donation Drives
+                  {t('navCamps')}
                 </button>
               </li>
               <li>
@@ -79,7 +79,7 @@ export const Footer = () => {
                   onClick={() => setActiveTab('emergency-sos')}
                   style={{ color: '#ef4444', fontWeight: '700' }}
                 >
-                  Emergency SOS Blood Broadcast
+                  {t('navEmergency')}
                 </button>
               </li>
               <li>
@@ -88,7 +88,7 @@ export const Footer = () => {
                   className="footer-link-btn"
                   onClick={() => setActiveTab('verify-cert')}
                 >
-                  Verify QR Donor Certificate
+                  {t('navVerifyCert')}
                 </button>
               </li>
               <li>
@@ -97,13 +97,13 @@ export const Footer = () => {
                   className="footer-link-btn"
                   onClick={() => setActiveTab('register')}
                 >
-                  Register as Voluntary Donor
+                  {t('registerAsDonor')}
                 </button>
               </li>
             </ul>
           </div>
 
-          {/* Column 3: Blood Compatibility Quick Facts (Clean Solid Card) */}
+          {/* Column 3: Blood Compatibility Quick Facts */}
           <div className="footer-col">
             <h4 className="footer-col-title">Compatibility Matrix</h4>
             <div className="footer-solid-card">
@@ -175,7 +175,7 @@ export const Footer = () => {
         {/* Bottom Bar */}
         <div className="footer-bottom">
           <div>
-            © {new Date().getFullYear()} BloodBuddy Unified Transfusion Network. All rights reserved.
+            © {new Date().getFullYear()} BloodBuddy. {t('allRightsReserved')}
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', flexWrap: 'wrap', justifyContent: 'center' }}>
             <span>Built for life-saving emergency care with</span>
